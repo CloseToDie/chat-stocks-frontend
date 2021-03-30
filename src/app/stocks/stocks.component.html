@@ -1,14 +1,11 @@
-<h1>Stocks</h1>
-
-<p>All stocks</p>
-
-
 <div class="container">
-  <div class="card py-2 mt-5 rounded">
+  <h1 class="mt-2">Stocks</h1>
+
+  <div class="card py-2 my-5 rounded" *ngIf="stocks$ | async as stocks">
     <div class="card-body">
       <div class="row">
         <div class="col-lg-3">
-          <div class="card" *ngIf="stocks$ | async as stocks">
+          <div class="card">
             <div class="card-header">
               Stocks
             </div>
@@ -21,8 +18,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let stock of stocks">
-                    <td>{{ stock.name }}</td>
+                  <tr *ngFor="let stock of stocks; let i = index">
+                    <td (click)="setStock(i)">{{ stock.name }}</td>
                     <td>{{ stock.price }}</td>
                   </tr>
                 </tbody>
@@ -35,8 +32,15 @@
             <div class="card-header">
               Selected stock
             </div>
-            <div class="card-body">
+            <div class="card-body" *ngIf="selectedStock != undefined">
+              <h3 class="text-center">{{ stocks[selectedStock].name }}</h3>
 
+              <h5>Description: </h5>
+              <p>{{ stocks[selectedStock].description }}</p>
+
+              Price: {{ stocks[selectedStock].price }}
+              <button (click)="increment(stocks[selectedStock].id)">+</button>
+              <button (click)="decrement(stocks[selectedStock].id)">-</button>
             </div>
           </div>
         </div>
@@ -45,20 +49,11 @@
   </div>
 </div>
 
-<div class="card" *ngIf="stocks$ | async as stocks">
-  <div class="card-body">
-    <div *ngFor="let stock of stocks">
-      <div>
-        {{ stock.name }} - [{{ stock.price }}] <span (click)="increment(stock.id)">+</span> | <span (click)="decrement(stock.id)">-</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 <div class="container">
   <div class="card py-2 mt-5 rounded">
+    <div class="card-header">
+      Add stock
+    </div>
     <div class="card-body">
       <div class="row">
         <div class="col-lg-3"></div>

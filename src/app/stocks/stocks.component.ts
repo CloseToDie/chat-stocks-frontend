@@ -15,6 +15,7 @@ export class StocksComponent implements OnInit {
   addStockName = new FormControl('');
   addStockDesc = new FormControl('');
   addStockPrice = new FormControl('');
+  selectedStock: number | undefined = 0;
 
   constructor(private stocksService: StocksService) { }
 
@@ -45,5 +46,9 @@ export class StocksComponent implements OnInit {
 
   decrement(id: string): void {
     this.stocksService.decrement(id);
+  }
+
+  setStock(key: number): void {
+    this.selectedStock = key;
   }
 }
