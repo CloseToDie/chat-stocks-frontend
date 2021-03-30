@@ -12,9 +12,4 @@ export class AppComponent {
   clients$: Observable<ChatClient[]> | undefined;
 
   title = 'chat-app-y2021-frontend';
-
-  constructor(chatService: ChatService) {
-    this.clients$ = chatService.listenForClients();
-  }
-
 }

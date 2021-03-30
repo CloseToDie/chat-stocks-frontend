@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { StocksRoutingModule } from './stocks-routing.module';
 import { StocksComponent } from './stocks.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [StocksComponent],
   imports: [
     CommonModule,
-    StocksRoutingModule
+    StocksRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class StocksModule { }

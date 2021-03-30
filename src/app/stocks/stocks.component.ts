@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {StocksModel} from './shared/stocks.model';
+import {StocksService} from './shared/stocks.service';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-stocks',
@@ -6,10 +10,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stocks.component.scss']
 })
 export class StocksComponent implements OnInit {
+  stocks$: Observable<StocksModel[]> | undefined;
+  addStockName = new FormControl('');
+  addStockDesc = new FormControl('');
+  addStockPrice = new FormControl('');
 
-  constructor() { }
+  constructor(private stocksService: StocksService) { }
 
   ngOnInit(): void {
+    this.stocks$ = this.stocksService.getAllStocks();
   }
 
+  addStock(): void {
+    if (this.addStockName.value && this.addStockPrice.value) {
+      const name = this.addStockName.value;
+      const description = this.addStockDesc.value;
+      const price = this.addStockPrice.value;
+      this.stocksService.addStocks({id: '', name, description, price});
+      this.clearAddForm();
+    }
+  }
+
+  private clearAddForm(): void {
+    this.addStockName.patchValue('');
+    this.addStockDesc.patchValue('');
+    this.addStockPrice.patchValue('');
+  }
+
+  increment(id: string): void {
+    this.stocksService.increment(id);
+  }
+
+  decrement(id: string): void {
+    this.stocksService.decrement(id);
+  }
 }

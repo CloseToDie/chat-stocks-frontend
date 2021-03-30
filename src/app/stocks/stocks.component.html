@@ -1,1 +1,43 @@
-<p>stocks works!</p>
+<h1>Stocks</h1>
+
+<p>All stocks</p>
+
+<div class="card" *ngIf="stocks$ | async as stocks">
+  <div class="card-body">
+    <div *ngFor="let stock of stocks">
+      <div>
+        {{ stock.name }} - [{{ stock.price }}] <span (click)="increment(stock.id)">+</span> | <span (click)="decrement(stock.id)">-</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="card py-2 mt-5 rounded">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="addStockName">Enter Name</label>
+            <input id="addStockName" class="form-control" type="text" [formControl]="addStockName">
+          </div>
+
+          <div class="form-group">
+            <label for="addStockDesc">Enter Description</label>
+            <input id="addStockDesc" class="form-control" type="text" [formControl]="addStockDesc">
+          </div>
+
+          <div class="form-group">
+            <label for="addStockPrice">Enter Price</label>
+            <input id="addStockPrice" class="form-control" type="text" [formControl]="addStockPrice">
+          </div>
+          <button class="btn btn-primary px-5" (click)="addStock()">Add</button>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
