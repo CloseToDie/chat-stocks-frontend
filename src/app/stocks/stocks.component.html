@@ -2,6 +2,49 @@
 
 <p>All stocks</p>
 
+
+<div class="container">
+  <div class="card py-2 mt-5 rounded">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card" *ngIf="stocks$ | async as stocks">
+            <div class="card-header">
+              Stocks
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Stock</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let stock of stocks">
+                    <td>{{ stock.name }}</td>
+                    <td>{{ stock.price }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="card">
+            <div class="card-header">
+              Selected stock
+            </div>
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card" *ngIf="stocks$ | async as stocks">
   <div class="card-body">
     <div *ngFor="let stock of stocks">

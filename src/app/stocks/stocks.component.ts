@@ -3,6 +3,7 @@ import {StocksModel} from './shared/stocks.model';
 import {StocksService} from './shared/stocks.service';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {AddStockDto} from './shared/addStock.dto';
 
 @Component({
   selector: 'app-stocks',
@@ -26,7 +27,8 @@ export class StocksComponent implements OnInit {
       const name = this.addStockName.value;
       const description = this.addStockDesc.value;
       const price = this.addStockPrice.value;
-      this.stocksService.addStocks({id: '', name, description, price});
+      const stock: AddStockDto = {name, description, price};
+      this.stocksService.addStocks(stock);
       this.clearAddForm();
     }
   }

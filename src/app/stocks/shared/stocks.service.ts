@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {StocksModel} from './stocks.model';
 import {SocketStock} from '../../app.module';
+import {AddStockDto} from './addStock.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class StocksService {
 
   constructor(private socket: SocketStock) { }
 
-  addStocks(stock: StocksModel): void {
+  addStocks(stock: AddStockDto): void {
     this.socket.emit('add', stock);
   }
 
